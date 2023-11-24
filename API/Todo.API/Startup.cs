@@ -1,6 +1,7 @@
 ﻿using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Todo.Core;
 using Todo.Persistence.PostgreSQL;
 using Todo.Services;
 
@@ -43,8 +44,8 @@ namespace Todo.API
                 options.UseNpgsql(Configuration.GetConnectionString("TodoDB"),
                     x => x.MigrationsAssembly("Todo.Persistence.PostgreSQL")));
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddCoreServices();
-
             services.AddAutoMapper(typeof(Startup));
         }
 

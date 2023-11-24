@@ -25,7 +25,8 @@ namespace Todo.Persistence.PostgreSQL
             modelBuilder.Entity<TodoItem>().HasData(new TodoItem
             {
                 Id = 1,
-                Title = "My First Todo Item"
+                Title = "My First Todo Item",
+                IsActive = true
             });
         }
     }

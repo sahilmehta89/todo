@@ -21,7 +21,7 @@ namespace Todo.Persistence.PostgreSQL.Configurations
             builder
                 .Property(m => m.Title)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             builder
                 .Property(m => m.IsDone);

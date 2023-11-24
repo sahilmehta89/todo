@@ -30,6 +30,7 @@ namespace Todo.Services
                 if (!todoItemExists)
                 {
                     var todoItem = _mapper.Map<TodoItem>(todoItemCreateModel);
+                    todoItem.IsActive = true;
                     await _unitOfWork.TodoItem.AddTodoItem(todoItem).ConfigureAwait(false);
                     var todoItemViewModel = _mapper.Map<TodoItemViewModel>(todoItem);
                     todoItemServiceResponse = new TodoItemServiceResponse(todoItemViewModel);
