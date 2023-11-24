@@ -9,6 +9,10 @@ namespace Todo.API
             try
             {
                 CreateHostBuilder(args).Build().Run();
+                var logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console()
+                    .CreateLogger();
             }
             catch (Exception ex)
             {
