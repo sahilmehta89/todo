@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  todoApiBaseUrl: 'https://mp-admin-fe-cmp-test.messenger-pigeon.com',
+  todoApiBaseUrl: 'https://localhost:7217',
 };
 
 /*
