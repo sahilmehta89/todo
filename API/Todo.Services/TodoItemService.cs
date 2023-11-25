@@ -56,19 +56,10 @@ namespace Todo.Services
 
             var existing = await _unitOfWork.TodoItem.GetTodoItemById(todoItemUpdateModel.Id).ConfigureAwait(false);
 
-            var todoItemExists = await IsTodoItemExists(todoItemUpdateModel.Title).ConfigureAwait(false);
-
-            if (todoItemExists)
-            {
-                todoItemServiceResponse = new TodoItemServiceResponse(StatusCodes.Status400BadRequest, "Todo with this title already exists");
-            }
-            else
-            {
-                existing.Title = todoItemUpdateModel.Title;
-                existing.IsDone = todoItemUpdateModel.IsDone;
-                await _unitOfWork.TodoItem.UpdateTodoItem(existing).ConfigureAwait(false);
-                todoItemServiceResponse = new TodoItemServiceResponse(_mapper.Map<TodoItemViewModel>(existing));
-            }
+            existing.Title = todoItemUpdateModel.Title;
+            existing.IsDone = todoItemUpdateModel.IsDone;
+            await _unitOfWork.TodoItem.UpdateTodoItem(existing).ConfigureAwait(false);
+            todoItemServiceResponse = new TodoItemServiceResponse(_mapper.Map<TodoItemViewModel>(existing));
 
             return todoItemServiceResponse;
         }
