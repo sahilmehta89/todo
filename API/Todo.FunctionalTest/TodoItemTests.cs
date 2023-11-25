@@ -135,13 +135,23 @@ namespace Todo.FunctionalTest
             var stringResponse1 = await response1.Content.ReadAsStringAsync().ConfigureAwait(false);
             Assert.Equal(System.Net.HttpStatusCode.OK, response1.StatusCode);
 
-            // Get All Todos
+            // Get Todo details
             var response = await client.GetAsync("/api/TodoItem/" + stringResponse2);
             response.EnsureSuccessStatusCode();
 
             var stringResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var result = JsonConvert.DeserializeObject<TodoItemViewModel>(stringResponse);
             Assert.Null(result);
+
+            // Get all Todo to ensure other items exists in the DB
+            response = await client.GetAsync("/api/TodoItem");
+            response.EnsureSuccessStatusCode();
+
+            stringResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var result1 = JsonConvert.DeserializeObject<IEnumerable<TodoItemViewModel>>(stringResponse);
+
+            Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
+            Assert.True(result1?.Count() > 0);
         }
     }
 }
