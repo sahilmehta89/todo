@@ -1,0 +1,36 @@
+<div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
+    <div class="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+        <div class="mb-4">
+            <h1 class="text-4xl font-black">Todo List</h1>
+            <form [formGroup]="addupdateTodoForm" class="flex mt-4" (ngSubmit)="onSubmitAddUpdateTodoForm()">
+                <mat-form-field class="w-full mr-3">
+                    <mat-label>ToDo</mat-label>
+                    <input matInput placeholder="Enter Todo Title" class="w-full" formControlName="title">
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" [disabled]="addupdateTodoForm.invalid"
+                    class="mr-3">Save</button>
+                <button mat-raised-button type="button" (click)="onClickCancelAddUpdateToDoForm()"
+                    class="mr-3">Cancel</button>
+            </form>
+        </div>
+        <div>
+            <div class="flex mb-4 items-center"
+                *ngFor="let todoItemViewModel of todoItemsViewModel; trackBy: trackByTodoItems; index as i">
+                <p class="w-full text-grey-darkest" [ngClass]="{'line-through': todoItemViewModel.isDone}">
+                    {{todoItemViewModel.title}}</p>
+                <button mat-mini-fab color="primary" aria-label="Edit" (click)="onClickEditTodoItem(todoItemViewModel)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab aria-label="Done" class="bg-green"
+                    (click)="onClickMarkDoneTodoItem(todoItemViewModel)">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-mini-fab color="warn" aria-label="Delete"
+                    (click)="onClickRemoveTodoItem(todoItemViewModel, i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
