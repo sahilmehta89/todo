@@ -138,7 +138,8 @@ export class TodoComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe({
         next: (apiResult: number) => {
-          let todoItemViewModel: TodoItemViewModel = new TodoItemCreateModel();
+          this.addupdateTodoForm.reset();
+          let todoItemViewModel: TodoItemViewModel = new TodoItemViewModel();
           todoItemViewModel.id = apiResult;
           todoItemViewModel.title = todoItemCreateModel.title;
           todoItemViewModel.isDone = false;
@@ -165,6 +166,9 @@ export class TodoComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe({
         next: () => {
+          this.addupdateTodoForm.reset();
+          const index = this.todoItemsViewModel.findIndex((todoItemViewModel : TodoItemViewModel) => todoItemViewModel.id === todoItemUpdateModel.id);
+          this.todoItemsViewModel[index].title = todoItemUpdateModel.title;
         },
         error: (e) => {
           this.onErrorInEditTodoItem(e);
