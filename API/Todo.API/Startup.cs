@@ -1,5 +1,6 @@
 ﻿using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
 using Todo.Core;
 using Todo.Persistence.PostgreSQL;
@@ -38,7 +39,17 @@ namespace Todo.API
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                        .SetIsOriginAllowedToAllowWildcardSubdomains();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                    builder.AllowCredentials();
+                });
+            });
 
             services.AddDbContext<TodoDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("TodoDB"),
