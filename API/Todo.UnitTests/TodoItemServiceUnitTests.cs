@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Moq;
-using Todo.Core.Model;
-using Todo.Core.Model.Dto;
 using Todo.Persistence.PostgreSQL;
 using Todo.Services;
 using Todo.Services.Maps;
