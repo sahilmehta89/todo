@@ -80,6 +80,12 @@ namespace Todo.Services
             return todoItemsDto;
         }
 
+        public async Task<TodoItemViewModel> GetTodoItem(int id)
+        {
+            var existing = await _unitOfWork.TodoItem.GetTodoItemById(id).ConfigureAwait(false);
+            return _mapper.Map<TodoItemViewModel>(existing);
+        }
+
         public async Task<TodoItemServiceResponse> DeleteTodoItem(int id)
         {
             TodoItemServiceResponse todoItemServiceResponse;

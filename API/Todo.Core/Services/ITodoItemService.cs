@@ -13,6 +13,7 @@ namespace Todo.Core.Services
         Task<TodoItemServiceResponse> AddTodoItem(TodoItemCreateModel todoItemCreateModel);
         Task<TodoItemServiceResponse> UpdateTodoItem(TodoItemUpdateModel todoItemUpdateModel);
         Task<IEnumerable<TodoItemViewModel>> GetAllTodoItem();
+        Task<TodoItemViewModel> GetTodoItem(int id);
         Task<TodoItemServiceResponse> DeleteTodoItem(int id);
     }
 }

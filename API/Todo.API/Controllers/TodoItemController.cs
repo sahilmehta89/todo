@@ -36,6 +36,25 @@ namespace Todo.API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/TodoItem/{id}")]
+        [ProducesResponseType(typeof(TodoItemViewModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> GetTodoItem(int id)
+        {
+            try
+            {
+                TodoItemViewModel todoItem = await _todoItemService.GetTodoItem(id).ConfigureAwait(false);
+                return Ok(todoItem);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error while calling GetTodoItem in TodoItemController");
+                return GetStatusCodeWithProblemDetails(StatusCodes.Status500InternalServerError, "Some error occurred");
+            }
+        }
+
         [HttpPost]
         [Route("api/TodoItem/")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.Created)]

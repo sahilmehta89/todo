@@ -60,7 +60,10 @@ namespace Todo.API
             using (var scope = app.ApplicationServices.CreateScope())
             using (var context = scope.ServiceProvider.GetService<TodoDbContext>())
             {
-                context.Database.Migrate();
+                if (context.Database.IsRelational())
+                {
+                    context.Database.Migrate();
+                }
             }
 
             if (!env.IsProduction())
