@@ -1,0 +1,11 @@
+.doneTodo{
+    background-color: gray !important;
+}
+
+.undoneTodo{
+    background-color: green !important;
+}
+
+.saveAndCancelBtnHeight{
+    height: 56px;
+}

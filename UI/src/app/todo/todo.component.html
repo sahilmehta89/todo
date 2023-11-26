@@ -8,9 +8,9 @@
                     <input matInput placeholder="Enter Todo Title" class="w-full" formControlName="title">
                 </mat-form-field>
                 <button mat-raised-button color="primary" type="submit" [disabled]="addupdateTodoForm.invalid"
-                    class="mr-3">Save</button>
+                    class="mr-3 saveAndCancelBtnHeight">Save</button>
                 <button mat-raised-button type="button" (click)="onClickCancelAddUpdateToDoForm()"
-                    class="mr-3">Cancel</button>
+                    class="mr-3 saveAndCancelBtnHeight">Cancel</button>
             </form>
         </div>
         <div>
@@ -18,15 +18,14 @@
                 *ngFor="let todoItemViewModel of todoItemsViewModel; trackBy: trackByTodoItems; index as i">
                 <p class="w-full text-grey-darkest" [ngClass]="{'line-through': todoItemViewModel.isDone}">
                     {{todoItemViewModel.title}}</p>
-                <button mat-mini-fab color="primary" aria-label="Edit" (click)="onClickEditTodoItem(todoItemViewModel)">
+                <button mat-mini-fab color="primary" aria-label="Edit" (click)="onClickEditTodoItem(todoItemViewModel)" class="mr-2">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-mini-fab aria-label="Done" class="bg-green"
-                    (click)="onClickMarkDoneTodoItem(todoItemViewModel)">
+                <button mat-mini-fab aria-label="Done" (click)="onClickMarkDoneTodoItem(todoItemViewModel, i)" [ngClass]="{'doneTodo': todoItemViewModel.isDone, 'undoneTodo': !todoItemViewModel.isDone,}" class="mr-2">
                     <mat-icon>done</mat-icon>
                 </button>
                 <button mat-mini-fab color="warn" aria-label="Delete"
-                    (click)="onClickRemoveTodoItem(todoItemViewModel, i)">
+                    (click)="onClickRemoveTodoItem(todoItemViewModel, i)" class="mr-2">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>

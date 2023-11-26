@@ -72,13 +72,15 @@ export class TodoComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onClickMarkDoneTodoItem(todoItemViewModel: TodoItemViewModel): void {
+  public onClickMarkDoneTodoItem(todoItemViewModel: TodoItemViewModel, index: number): void {
     let todoItemUpdateModel: TodoItemUpdateModel = TodoItemUpdateModel.fromJS(todoItemViewModel.toJSON());
     todoItemUpdateModel.isDone = !todoItemUpdateModel.isDone;
     this._todoApiClient.todoItemPUT(todoItemUpdateModel)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe({
         next: () => {
+          const index = this.todoItemsViewModel.findIndex((todoItemViewModel : TodoItemViewModel) => todoItemViewModel.id === todoItemUpdateModel.id);
+          this.todoItemsViewModel[index].isDone = todoItemUpdateModel.isDone;
         },
         error: (e) => {
           this.onErrorInMarkDoneTodoItem(e);
