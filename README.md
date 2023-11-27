@@ -11,6 +11,7 @@ This project requires you to have the following installed on your machine.
 - Docker
 - npm
 - dotnet core cli
+- Azure App Registration
 
 ### Notes for Windows
 
@@ -18,6 +19,17 @@ If you have issues getting Docker for windows running, checkout these docs:
 
 - https://docs.docker.com/docker-for-windows/troubleshoot/
 - https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization
+
+### Setup
+
+1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [authorization code flow with PKCE](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow). This will require that you redirect URI configured in the portal is of type `SPA`.
+2. Clone this repository `git clone https://github.com/sahilmehta89/todo.git`
+3. Open the [UI/src/app/app.module.ts](./src/app/app.module.ts) file and provide the required configuration values.
+    1. Replace the string `"Enter_the_Application_Id_Here"` with your app/client ID on AAD Portal.
+    2. Replace the string `"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here"` with tenant ID
+    3. Replace the string `"Enter_the_Redirect_Uri_Here"` with the redirect uri you setup on AAD Portal.
+    4. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me"` with `"https://graph.microsoft.com/v1.0/me"`
+    5. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
 
 ### Starting the project
 
@@ -29,7 +41,7 @@ If you are not using a linux/unix based operating system (ex: Windows/DOS), you 
 - Run `dotnet restore` inside the `API` directory. This will install the C# dependencies needed to run the api.
 - Then `dotnet run --project Todo.API` inside the `API` directory. This will start the api server.
 - Inside another git bash or powershell directory, go to the `UI` directory and run `npm install`.
-- Run `npm run start` in the `UI` directory.
+- After above command is complete, run `npm run start` in the `UI` directory.
 
 You will know everything is running correctly when you go to http://localhost:4200 in your browser, and see a todo list.
 
