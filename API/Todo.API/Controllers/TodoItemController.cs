@@ -19,14 +19,14 @@ namespace Todo.API.Controllers
 
         [HttpGet]
         [Route("api/TodoItem/")]
-        [ProducesResponseType(typeof(IEnumerable<TodoItemViewModel>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(IEnumerable<TodoItemViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllTodoItem()
         {
             try
             {
-                IEnumerable<TodoItemViewModel> todoItems = await _todoItemService.GetAllTodoItem().ConfigureAwait(false);             
+                IEnumerable<TodoItemViewModel> todoItems = await _todoItemService.GetAllTodoItem().ConfigureAwait(false);
                 return Ok(todoItems);
             }
             catch (Exception ex)
@@ -38,9 +38,9 @@ namespace Todo.API.Controllers
 
         [HttpGet]
         [Route("api/TodoItem/{id}")]
-        [ProducesResponseType(typeof(TodoItemViewModel), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(TodoItemViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetTodoItem(int id)
         {
             try
@@ -57,9 +57,9 @@ namespace Todo.API.Controllers
 
         [HttpPost]
         [Route("api/TodoItem/")]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.Created)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateTodoItem(TodoItemCreateModel todoItemCreateModel)
         {
             try
@@ -81,9 +81,9 @@ namespace Todo.API.Controllers
 
         [HttpPut]
         [Route("api/TodoItem/")]
-        [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateTodoItem(TodoItemUpdateModel todoItemUpdateModel)
         {
             try
