@@ -26,10 +26,10 @@ If you have issues getting Docker for windows running, checkout these docs:
 2. Clone this repository `git clone https://github.com/sahilmehta89/todo.git`
 3. Open the [UI/src/app/app.module.ts](./src/app/app.module.ts) file and provide the required configuration values.
     1. Replace the string `"Enter_the_Application_Id_Here"` with your app/client ID on AAD Portal.
-    2. Replace the string `"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here"` with tenant ID
-    3. Replace the string `"Enter_the_Redirect_Uri_Here"` with the redirect uri you setup on AAD Portal.
-    4. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me"` with `"https://graph.microsoft.com/v1.0/me"`
-    5. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
+    2. Replace the string `"<Enter_the_Tenant_Info_Here>"` with tenant ID
+    4. Replace the string `"Enter_the_Redirect_Uri_Here"` with the redirect uri you setup on AAD Portal.
+    5. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me"` with `"https://graph.microsoft.com/v1.0/me"`
+    6. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
 
 ### Starting the project
 
